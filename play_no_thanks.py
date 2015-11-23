@@ -3,7 +3,7 @@ from random import sample, choice
 
 class Player(object):
 	def __init__(self):
-		self.hand = []
+		self.hand = set()
 		self.chips = 11
 
 	def play(self, table, players):
@@ -23,8 +23,7 @@ class Player(object):
 		self.chips += table.chips
 		table.chips = 0
 		# take card
-		self.hand.append(table.card)
-		self.hand.sort()
+		self.hand.add(table.card)
 		table.card = table.cards.pop()
 
 	def pass_(self, table):
@@ -32,14 +31,15 @@ class Player(object):
 		table.chips += 1
 
 	def score(self):
+		hand = sorted(list(self.hand))
 		score = -chips
 		index = 0
-		while index < len(self.hand):
+		while index < len(hand):
 			if index != 0:
-				if self.hand[index-1] == self.hand[index]-1:
+				if hand[index-1] == hand[index]-1:
 					continue
 			else:
-				score += self.hand[index]
+				score += hand[index]
 		return score
 
 class Players(object):
