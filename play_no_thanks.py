@@ -9,6 +9,8 @@ class Player(object):
 	def play(self, table, players):
 		'''
 		'play' calls 'take' or 'pass_'
+
+		This function is where game strategy can be implemented. 
 		'''
 		if self.chips:
 			s = choice([self.take, self.pass_])
