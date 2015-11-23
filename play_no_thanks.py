@@ -63,6 +63,7 @@ class Table(object):
 		self.card = self.cards.pop()
 
 def play_game(players, table):
+	table.deal()
 	while table.cards:
 		player = players.next()
 		player.play(table, players)
@@ -71,7 +72,6 @@ if __name__ == '__main__':
 	num_players = input('How many players?')
 	players = Players(num_players)
 	table = Table()
-	table.deal()
 	play_game(players, table)
 	print 'Done'
 
