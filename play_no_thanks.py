@@ -69,7 +69,7 @@ def play_game(players, table):
 		player = players.next()
 		player.play(table, players)
 
-def determine_winner(players):
+def determine_results(players):
 	player = players.next()
 	results = {}
 	while player not in results:
@@ -82,7 +82,8 @@ if __name__ == '__main__':
 	players = Players(num_players)
 	table = Table()
 	play_game(players, table)
-	print "Results: ", determine_winner(players)
+	results = determine_results(players)
+	print "Results: ", results
 
 
 
