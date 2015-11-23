@@ -59,8 +59,7 @@ class Table(object):
 
 	def deal(self):
 		deck = range(3, 36)
-		dealt_cards = sample(deck, 24)
-		self.cards = dealt_cards
+		self.cards = sample(deck, 24)
 		self.card = self.cards.pop()
 
 def play_game(players, table):
