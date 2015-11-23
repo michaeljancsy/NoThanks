@@ -19,6 +19,10 @@ class Player(object):
 			self.take(table)
 
 	def take(self, table):
+		# take chips
+		self.chips += table.chips
+		table.chips = 0
+		# take card
 		self.hand.append(table.card)
 		self.hand.sort()
 		table.card = table.cards.pop()
@@ -40,6 +44,8 @@ class Player(object):
 
 class Players(object):
 	def __init__(self, num_players):
+		if (num_players < 3) or (num_players > 5):
+			raise ValueError("No Thanks requires 3 - 5 players.")
 		self.num_players = num_players
 		self._players = [Player() for _ in xrange(num_players)]
 		self.cycle = cycle(self._players)
