@@ -35,10 +35,7 @@ class Player(object):
 		score = -chips
 		index = 0
 		while index < len(hand):
-			if index != 0:
-				if hand[index-1] == hand[index]-1:
-					continue
-			else:
+			if index == 0 or hand[index-1] != hand[index]-1:
 				score += hand[index]
 		return score
 
