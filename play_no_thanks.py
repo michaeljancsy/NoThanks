@@ -1,9 +1,3 @@
-# goal: find optimal strategy for playing no thanks
-
-# optimization criterion: maximize entropy of outcomes
-
-# training method 1: probability of accepting card is estimated based on sigmoid function (trained via SGD?)
-
 from itertools import cycle
 from random import sample, choice
 
