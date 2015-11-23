@@ -13,8 +13,8 @@ class Player(object):
 		This function is where game strategy can be implemented. 
 		'''
 		if self.chips:
-			s = choice([self.take, self.pass_])
-			s(table)
+			random_play = choice([self.take, self.pass_])
+			random_play(table)
 		else:
 			self.take(table)
 
