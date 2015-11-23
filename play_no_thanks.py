@@ -32,11 +32,12 @@ class Player(object):
 
 	def score(self):
 		hand = sorted(list(self.hand))
-		score = -chips
+		score = -self.chips
 		index = 0
 		while index < len(hand):
 			if index == 0 or hand[index-1] != hand[index]-1:
 				score += hand[index]
+			index += 1
 		return score
 
 class Players(object):
@@ -68,12 +69,20 @@ def play_game(players, table):
 		player = players.next()
 		player.play(table, players)
 
+def determine_winner(players):
+	player = players.next()
+	results = {}
+	while player not in results:
+		results[player] = player.score()
+		player = players.next()
+	return results
+
 if __name__ == '__main__':
 	num_players = input('How many players?')
 	players = Players(num_players)
 	table = Table()
 	play_game(players, table)
-	print 'Done'
+	print "Results: ", determine_winner(players)
 
 
 
