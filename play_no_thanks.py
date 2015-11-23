@@ -31,7 +31,7 @@ class Player(object):
 		table.chips += 1
 
 	def score(self):
-		hand = sorted(list(self.hand))
+		hand = sorted(self.hand)
 		score = -self.chips
 		index = 0
 		while index < len(hand):
