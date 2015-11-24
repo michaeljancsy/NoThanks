@@ -73,18 +73,18 @@ def play_game(players, table):
         player.play(table, players)
 
 
-def determine_results(players):
+def calculate_scores(players):
     player = players.next()
-    results = {}
-    while player not in results:
-        results[player] = player.score()
+    scores = {}
+    while player not in scores:
+        scores[player] = player.score()
         player = players.next()
-    return results
+    return scores
 
 if __name__ == '__main__':
     num_players = input('How many players?')
     players = Players(num_players)
     table = Table()
     play_game(players, table)
-    results = determine_results(players)
-    print "Results: ", results
+    scores = calculate_scores(players)
+    print "Scores: ", scores
