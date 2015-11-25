@@ -4,6 +4,10 @@ from random import choice
 
 
 def default(self, table, players):
+    """
+    Randomly chooses between take or pass. Chooses take if player has no
+    chips.
+    """
     if self.chips:
         random_play = choice([self.take, self.pass_])
         random_play(table)
@@ -12,9 +16,12 @@ def default(self, table, players):
 
 
 def heuristic(self, table, players):
+    """
+    Simple strategy, still in development. Roughly, it takes a card if the
+    card's value is less than the average value of card's remaining on the
+    table, adjusting for the number of included chips.
+    """
     # take if the marginal point value is less than 1 + the expected remainder
-    # (note that the expected remainder doesn't include others' coins)
-    # IN PROGRESS
     cards_in_hands = set()
     for player in players.list_:
         cards_in_hands.update(player.hand)
