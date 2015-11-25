@@ -1,5 +1,5 @@
 from itertools import cycle
-from random import sample, choice
+from random import sample
 
 
 class Player(object):
