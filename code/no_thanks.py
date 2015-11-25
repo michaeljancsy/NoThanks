@@ -119,8 +119,8 @@ def calculate_scores(players):
 def run_simulation(num_players=5):
     """Runs a game from start to finish
 
-    Allows user to set num_players. Future versions will allow user to set
-    strategies.
+    Allows user to set num_players. Future versions will allow user to specify
+    players' strategies.
 
     Parameters
     ----------
