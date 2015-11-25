@@ -24,10 +24,7 @@ class Player(object):
     play = None
 
     def take(self, table):
-        """
-        Adds the table's card and chips to the player's hand and chips, and
-        then turns the next card on the table over.
-        """
+        """Takes card and chips from table and gives them to the player"""
         # take chips
         self.chips += table.chips
         table.chips = 0
