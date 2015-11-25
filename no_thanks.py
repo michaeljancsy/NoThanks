@@ -1,6 +1,5 @@
 from itertools import cycle
 from random import sample, choice
-from strategies import default, heuristic
 
 
 class Player(object):
@@ -8,7 +7,7 @@ class Player(object):
         self.hand = set()
         self.chips = 11
 
-    play = heuristic
+    play = None
 
     def take(self, table):
         # take chips
@@ -77,9 +76,3 @@ def run_simulation(num_players=5):
     play_game(players, table)
     scores = calculate_scores(players)
     return scores
-
-
-if __name__ == '__main__':
-    num_players = input('How many players?')
-    scores = run_simulation(num_players)
-    print "Scores: ", scores
