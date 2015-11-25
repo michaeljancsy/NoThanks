@@ -12,6 +12,7 @@ def default(self, table, players):
 def heuristic(self, table, players):
     # take if the marginal point value is less than 1 + the expected remainder
     # (note that the expected remainder doesn't include others' coins)
+    # IN PROGRESS
     cards_in_hands = set()
     for player in players.list_:
         cards_in_hands.update(player.hand)
