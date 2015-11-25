@@ -1,5 +1,6 @@
 from itertools import cycle
 from random import sample, choice
+from strategies import default, heuristic
 
 
 class Player(object):
@@ -7,17 +8,7 @@ class Player(object):
         self.hand = set()
         self.chips = 11
 
-    def play(self, table, players):
-        '''
-        'play' calls 'take' or 'pass_'
-
-        This function is where game strategy can be implemented.
-        '''
-        if self.chips:
-            random_play = choice([self.take, self.pass_])
-            random_play(table)
-        else:
-            self.take(table)
+    play = heuristic
 
     def take(self, table):
         # take chips
@@ -47,8 +38,8 @@ class Players(object):
         if (num_players < 3) or (num_players > 5):
             raise ValueError("No Thanks requires 3 - 5 players.")
         self.num_players = num_players
-        self._players = [Player() for _ in xrange(num_players)]
-        self.cycle = cycle(self._players)
+        self.list_ = [Player() for _ in xrange(num_players)]
+        self.cycle = cycle(self.list_)
 
     def next(self):
         return self.cycle.next()
@@ -74,17 +65,21 @@ def play_game(players, table):
 
 
 def calculate_scores(players):
-    player = players.next()
     scores = {}
-    while player not in scores:
+    for player in players.list_:
         scores[player] = player.score()
-        player = players.next()
     return scores
 
-if __name__ == '__main__':
-    num_players = input('How many players?')
+
+def run_simulation(num_players=5):
     players = Players(num_players)
     table = Table()
     play_game(players, table)
     scores = calculate_scores(players)
+    return scores
+
+
+if __name__ == '__main__':
+    num_players = input('How many players?')
+    scores = run_simulation(num_players)
     print "Scores: ", scores
