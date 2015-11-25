@@ -1,3 +1,5 @@
+"""Game strategies: functions to assign to Player.play"""
+
 from random import choice
 
 

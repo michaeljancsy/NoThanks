@@ -1,3 +1,5 @@
+"""Run simulations of No Thanks"""
+
 import no_thanks
 from strategies import default
 
