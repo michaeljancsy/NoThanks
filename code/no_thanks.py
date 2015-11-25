@@ -1,4 +1,4 @@
-"""No Thanks core functions"""
+"""No Thanks core elements"""
 
 from itertools import cycle
 from random import sample
