@@ -22,10 +22,9 @@ class Player(object):
 
     Notes
     -----
-    Strategies are implemented in strategies.py and passed to run_simulation.
-    Each strategy is a method assigned to Player.play which calls self.take
-    or self.pass_. By default, the player plays randomly according to
-    strategies.default_strategy.
+    By default, the player plays randomly according to
+    strategies.default_strategy. New strategies can be defined in
+    strategies.py and assigned to players via set_strategies.
     """
     def __init__(self, id_):
         self.id_ = id_
