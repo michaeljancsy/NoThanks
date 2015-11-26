@@ -1,12 +1,12 @@
-"""Game strategies: functions to assign to Player.play"""
+"""Strategies: functions that call take or pass_"""
 
 from random import choice
 
 
-def default(self, table, players):
+def default_strategy(self, table, players):
     """
     Randomly chooses between take or pass. Chooses take if player has no
-    chips.
+    chips. This strategy is assigned to newly instantiated Player objects.
     """
     if self.chips:
         random_play = choice([self.take, self.pass_])

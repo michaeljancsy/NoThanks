@@ -2,6 +2,8 @@
 
 from itertools import cycle
 from random import sample
+from types import MethodType
+from strategies import default_strategy
 
 
 class Player(object):
@@ -10,18 +12,20 @@ class Player(object):
     Attributes:
         hand: A set of integers representing a player's cards
         chips: An integer representing how many chips a player has
-        play: A function, initialized to None, which calls take or pass_
+        play: A function which calls take or pass_
 
     Notes
     -----
-    Strategy is implemented in the play function, based on the state of the
-    table and players. Choices of strategy are included in strategies.py.
+    Strategies are implemented in strategies.py and passed to run_simulation.
+    Each strategy is a function assigned to Player.play which calls self.take
+    or self.pass_. By default, the player plays randomly according to
+    strategies.default_strategy.
     """
     def __init__(self):
         self.hand = set()
         self.chips = 11
 
-    play = None
+    play = default_strategy
 
     def take(self, table):
         """Takes card and chips from table and gives them to the player"""
@@ -116,23 +120,34 @@ def calculate_scores(players):
     return scores
 
 
-def run_simulation(num_players=5):
+def set_strategies(players, strategies):
+    """Binds functions from strategies to Player.play for each player"""
+    if players.num_players != len(strategies):
+        raise ValueError("len(strategies) must equal num_players")
+    for player, strategy in zip(players.list_, strategies):
+        player.play = MethodType(strategy, player, Player)
+
+
+def run_simulation(num_players=5, strategies=None):
     """Runs a game from start to finish
 
-    Allows user to set num_players. Future versions will allow user to specify
-    players' strategies.
+    Allows user to set num_players and player strategies.
 
     Parameters
     ----------
     num_players : int, default 5
         Number of players in the simulation
+    strategies : iterable, optional
+        Functions to be assigned to Player.play for each player
 
     Returns
     -------
     scores : dict
-        A dictionary containing each player's score
-        """
+        Each player's final score
+    """
     players = Players(num_players)
+    if strategies:
+        set_strategies(players, strategies)
     table = Table()
     play_game(players, table)
     scores = calculate_scores(players)
