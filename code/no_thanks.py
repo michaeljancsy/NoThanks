@@ -10,14 +10,14 @@ class Player(object):
     """Represents a player of the game
 
     Attributes:
-        hand: A set of integers representing a player's cards
-        chips: An integer representing how many chips a player has
-        play: A function which calls take or pass_
+        hand : A set of integers representing a player's cards
+        chips : An integer representing how many chips a player has
+        play : A method which calls take or pass_
 
     Notes
     -----
     Strategies are implemented in strategies.py and passed to run_simulation.
-    Each strategy is a function assigned to Player.play which calls self.take
+    Each strategy is a method assigned to Player.play which calls self.take
     or self.pass_. By default, the player plays randomly according to
     strategies.default_strategy.
     """
@@ -54,7 +54,7 @@ class Player(object):
 
 
 class Players(object):
-    """Collection of player objects
+    """Collection of Player instances
 
     Parameters
     ----------
@@ -121,7 +121,7 @@ def calculate_scores(players):
 
 
 def set_strategies(players, strategies):
-    """Binds functions from strategies to Player.play for each player"""
+    """Assigns methods from strategies to Player.play for each player"""
     if players.num_players != len(strategies):
         raise ValueError("len(strategies) must equal num_players")
     for player, strategy in zip(players.list_, strategies):
@@ -138,7 +138,7 @@ def run_simulation(num_players=5, strategies=None):
     num_players : int, default 5
         Number of players in the simulation
     strategies : iterable, optional
-        Functions to be assigned to Player.play for each player
+        Methods to be assigned to Player.play for each player
 
     Returns
     -------

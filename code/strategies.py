@@ -1,4 +1,6 @@
-"""Strategies: functions that call take or pass_"""
+"""Strategies: Player methods that call self.take or self.pass_
+
+New strategies for the game can be developed in strategies.py"""
 
 from random import choice
 
