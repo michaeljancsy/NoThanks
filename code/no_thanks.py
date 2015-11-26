@@ -9,7 +9,13 @@ from strategies import default_strategy
 class Player(object):
     """Represents a player of the game
 
-    Attributes:
+    Parameters
+    ----------
+    id_ : int
+        A players ID, based on order of play. Player 0 goes first.
+
+    Attributes
+    ----------
         hand : A set of integers representing a player's cards
         chips : An integer representing how many chips a player has
         play : A method which calls take or pass_
@@ -21,7 +27,8 @@ class Player(object):
     or self.pass_. By default, the player plays randomly according to
     strategies.default_strategy.
     """
-    def __init__(self):
+    def __init__(self, id_):
+        self.id_ = id_
         self.hand = set()
         self.chips = 11
 
@@ -72,7 +79,7 @@ class Players(object):
         if (num_players < 3) or (num_players > 5):
             raise ValueError("No Thanks requires 3 - 5 players.")
         self.num_players = num_players
-        self.list_ = [Player() for _ in xrange(num_players)]
+        self.list_ = [Player(id_) for id_ in xrange(num_players)]
         self.cycle = cycle(self.list_)
 
     def next(self):
@@ -116,12 +123,16 @@ def calculate_scores(players):
     """Calculates each player's score and returns in a dictionary"""
     scores = {}
     for player in players.list_:
-        scores[player] = player.score()
+        scores[player.id_] = player.score()
     return scores
 
 
 def set_strategies(players, strategies):
-    """Assigns methods from strategies to Player.play for each player"""
+    """
+    Assigns methods from strategies to Player.play for each player.
+    Strategies are assigned in order, so player 0 gets strategies[0]
+    and so on.
+    """
     if players.num_players != len(strategies):
         raise ValueError("len(strategies) must equal num_players")
     for player, strategy in zip(players.list_, strategies):
