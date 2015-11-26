@@ -35,12 +35,12 @@ class Player(object):
 
     def take(self, table):
         """Takes card and chips from table and gives them to the player"""
-        # take chips
-        self.chips += table.chips
-        table.chips = 0
         # take card
         self.hand.add(table.card)
         table.card = table.cards.pop()
+        # take chips
+        self.chips += table.chips
+        table.chips = 0
 
     def pass_(self, table):
         """Pays one chip to the table"""
