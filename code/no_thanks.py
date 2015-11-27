@@ -147,8 +147,7 @@ def run_simulation(num_players=5, strategies=None):
     num_players : int, default 5
         Number of players in the simulation
     strategies : iterable, optional
-        Methods to be assigned to Player.play for each player. Uses
-        strategies.default_strategy if strategies is unspecified.
+        Methods to be assigned to Player.play for each player.
 
     Returns
     -------
