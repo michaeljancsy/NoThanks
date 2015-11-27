@@ -68,7 +68,7 @@ class Players(object):
 
     Attributes
     ----------
-    list_ : list
+    tuple_ : tuple
         Each player in the game
     cycle : itertools.cycle
         A data structure to allow continuous rotation through the players
@@ -77,8 +77,8 @@ class Players(object):
         if (num_players < 3) or (num_players > 5):
             raise ValueError("No Thanks requires 3 - 5 players.")
         self.num_players = num_players
-        self.list_ = [Player(id_) for id_ in xrange(num_players)]
-        self.cycle = cycle(self.list_)
+        self.tuple_ = tuple(Player(id_) for id_ in xrange(num_players))
+        self.cycle = cycle(self.tuple_)
 
     def next(self):
         """Returns the next player in the cycle"""
@@ -120,7 +120,7 @@ def play_game(players, table):
 def calculate_scores(players):
     """Calculates each player's score and returns in a dictionary"""
     scores = {}
-    for player in players.list_:
+    for player in players.tuple_:
         scores[player.id_] = player.score()
     return scores
 
@@ -133,7 +133,7 @@ def set_strategies(players, strategies):
     """
     if players.num_players != len(strategies):
         raise ValueError("len(strategies) must equal num_players")
-    for player, strategy in zip(players.list_, strategies):
+    for player, strategy in zip(players.tuple_, strategies):
         player.play = MethodType(strategy, player, Player)
 
 
