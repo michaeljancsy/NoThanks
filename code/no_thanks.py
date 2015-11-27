@@ -18,19 +18,19 @@ class Player(object):
     ----------
         hand : A set of integers representing a player's cards
         chips : An integer representing how many chips a player has
-        play : A method which calls take or pass_
 
     Notes
     -----
-    By default, the player plays randomly according to
-    strategies.default_strategy. New strategies can be defined in
-    strategies.py and assigned to players via set_strategies.
+    The play method is defined in strategies.py, By default, the player plays
+    randomly according to strategies.default_strategy. New strategies can be
+    developed in strategies.py and assigned to players via set_strategies.
     """
     def __init__(self, id_):
         self.id_ = id_
         self.hand = set()
         self.chips = 11
 
+    # play is a method which calls take or pass_ based on table and players
     play = default_strategy
 
     def take(self, table):
