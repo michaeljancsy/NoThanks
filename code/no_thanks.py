@@ -30,7 +30,6 @@ class Player(object):
         self.hand = set()
         self.chips = 11
 
-    # play is a method which calls take or pass_ based on table and players
     play = default_strategy
 
     def take(self, table):
@@ -148,7 +147,8 @@ def run_simulation(num_players=5, strategies=None):
     num_players : int, default 5
         Number of players in the simulation
     strategies : iterable, optional
-        Methods to be assigned to Player.play for each player
+        Methods to be assigned to Player.play for each player. Uses
+        strategies.default_strategy if strategies is unspecified.
 
     Returns
     -------
